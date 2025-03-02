@@ -56,6 +56,8 @@ public class Lab2_2 {
         js.executeScript("arguments[0].scrollIntoView();", deleteButton);
         deleteButton.click();
 
+        // 8. patikrinti are buvo grizta i pirma puslapi ir ar sumazejo puslapiu skaicius
+
         if(driver.findElement(By.xpath("//input[@aria-label='jump to page']")).getDomAttribute("value").equals("1")) {
             System.out.println("Pagination has moved to 1");
         } else {
