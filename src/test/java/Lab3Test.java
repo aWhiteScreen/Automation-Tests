@@ -22,11 +22,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Lab3 {
+public class Lab3Test {
 
     private static FirefoxDriver driver;
     //private static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    private static String email = "bolsonarista3062@gmail.com";
+    private static String email = "bolsonarista3064@gmail.com";
     private static String password = "jair4eva";
 
     @BeforeClass // Creates a user before any test
