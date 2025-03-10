@@ -20,7 +20,7 @@ public class Lab4Test { // 4) change password, confirm new password works and ol
     private static FirefoxDriver driver;
     //private static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     private static Random rand = new Random();
-    private static String email = String.format("bolsonarista%d@gmail.com", rand.nextInt(1000));
+    private static String email = String.format("bolsonarista%d@latviamail.com", rand.nextInt(1000));
     private static String password = "jair4eva";
     private static String newPassword = "lula4eva";
 
