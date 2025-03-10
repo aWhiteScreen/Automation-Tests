@@ -28,7 +28,7 @@ public class Lab3Test {
     private static FirefoxDriver driver;
     //private static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     private static Random rand = new Random();
-    private static String email = String.format("bolsonarista%d@gmail.com", rand.nextInt(1000));
+    private static String email = String.format("bolsonarista%d@smartmail.com", rand.nextInt(1000));
     private static String password = "jair4eva";
 
     @BeforeClass // Creates a user before any test
@@ -69,7 +69,8 @@ public class Lab3Test {
         driver.quit();
     } 
 
-    public void testScenario(String dataFile) throws IOException {
+    public void testScenario(String dataFile) throws IOException, InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // 2. Click "Log in"
         driver.findElement(By.linkText("Log in")).click();
@@ -85,7 +86,9 @@ public class Lab3Test {
         List<String> items = Files.readAllLines(filePath); // Reads Items from list
         for (String item : items) {
             WebElement digitalDownload = driver.findElement(By.linkText(item));
+            wait.until(ExpectedConditions.elementToBeClickable(digitalDownload));
             WebElement itemBox = digitalDownload.findElement(By.xpath("./ancestor::div[contains(@class, 'item-box')]"));
+            wait.until(ExpectedConditions.elementToBeClickable(itemBox));
             itemBox.findElement(By.className("product-box-add-to-cart-button")).click();
         }
 
@@ -95,6 +98,7 @@ public class Lab3Test {
         WebElement acceptTerms = driver.findElement(By.id("termsofservice"));
         wait.until(ExpectedConditions.elementToBeClickable(acceptTerms));
         acceptTerms.click();
+        Thread.sleep(1000);
         WebElement checkoutButton = driver.findElement(By.id("checkout"));
         wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
         checkoutButton.click();
@@ -129,7 +133,7 @@ public class Lab3Test {
 
         // 11. In "Confirm Order", click "Confirm"
         WebElement confirmOrder = driver.findElement(By.className("confirm-order-next-step-button"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        wait.until(ExpectedConditions.elementToBeClickable(confirmOrder));
         js.executeScript("arguments[0].scrollIntoView(true);", confirmOrder);
         confirmOrder.click();
 
@@ -141,11 +145,11 @@ public class Lab3Test {
     }
 
     @Test // o Test 1: Read from data1.txt
-    public void testCaseOne() throws IOException {
+    public void testCaseOne() throws IOException, InterruptedException {
         testScenario("test1.txt");
     }
     @Test // o Test 2: Read from data2.txt
-    public void testCaseTwo() throws IOException {
+    public void testCaseTwo() throws IOException, InterruptedException {
         testScenario("test2.txt");
     }
 
